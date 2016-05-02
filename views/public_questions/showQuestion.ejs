@@ -35,6 +35,7 @@
                         <span>created: <%= question.created %></span>
                     </div>
                 </div>
+                <% if(currentUser && (currentUser.username != "Teacher")) { %>
                 <div class="well">
                     <div>
                         <form action="/public_questions/publicQuestions/<%= question._id %>/answers" method="POST">
@@ -47,6 +48,7 @@
                         </form>
                     </div>
                 </div>
+                <% } %>
             </div>
             <div class="col-md-2">
                 <div class="list-group" style="border-width:0px;">

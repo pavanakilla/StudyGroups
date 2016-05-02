@@ -22,9 +22,8 @@ var questionRoutes          =   require("./routes/questions"),
     indexRoutes             =   require("./routes/index");
 
 //SETUP
-//mongoose.connect("mongodb://localhost/study_groups");
-//mongoose.connect("mongodb://pavan:akilla369@ds013232.mlab.com:13232/studygroups");
-mongoose.connect(process.env.DATABASEURL);
+var dburl = process.env.DATABASEURL;
+mongoose.connect(dburl);
 app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
