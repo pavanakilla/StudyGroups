@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <% if (currentUser && (currentUser.username != "Teacher")) { %>
+                    <a class="btn btn-primary btn-large" href="/public_questions/publicQuestions/newQuestion">Ask A Question</a>
+                <% } %>
+            </div>
+            <div class="col-md-9" style="padding-left:200px;">
+                <h2>Public Questions</h2>
+            </div>
+        </div>
+        
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <% questions.forEach(function (question) {
+                if(question.publicQuestion == "public") { %>
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-large btn-block ui basic red button" 
+                    style="margin: 10px 0;">
+                        <%= question.group.name %>
+                    </a>
+                </div>
+                <div class="col-md-10">
+                    <a href="/public_questions/publicQuestions/<%= question._id %>" class="btn btn-large btn-block ui basic blue button" 
+                    style="margin: 10px 0;">
+                        <%= question.title %>
+                    </a>
+                </div>
+            <% }}); %>
+        </div>
+        
+    </div>
+    
+<% include ../partials/footer %>

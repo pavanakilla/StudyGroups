@@ -1,0 +1,156 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <a href="/questions/questions" class="btn btn-large btn-info btn-block"><i class="step backward icon"></i> Go Back</a>
+            </div>
+            <% if(currentUser && question.author.id.equals(currentUser._id)) {%>
+                <div class="col-md-2">
+                    <a href="/questions/questions/<%= question._id %>/editQuestion" class="btn btn-large btn-warning btn-block">
+                        <i class="edit icon"></i> Edit Question</a>
+                </div>
+                <div class="col-md-2">
+                    <form action="/questions/questions/<%= question._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-large btn-danger btn-block"><i class="remove icon"></i> Delete Question</button>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <a href="#" class="ui circular icon button" style="min-height: 111px; min-width:111px; margin-left:30px; background:#DDEFBB;">
+			        <h2>
+				        <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-128.png"
+				        style="max-height:50px; max-width:50px;">
+			        </h2>
+			        <strong><%= question.author.username %></strong>
+				</a>
+            </div>
+            <div class="col-md-8">
+                <div class="thumbnail showQuestion" style="min-height: 111px;">
+                    <h1><%= question.title %></h1>
+                    <div class="caption-full">
+                        <span>created: <%= question.created %></span>
+                    </div>
+                </div>
+                <div class="well">
+                    <div>
+                        <form action="/questions/questions/<%= question._id %>/answers" method="POST">
+                            <div class="form-group">
+                                <textarea class="form-control" name="answer[text]" placeholder="Submit Answer" style="resize:none;" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-large btn-primary"><i class="play icon"></i> Submit Answer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="list-group" style="border-width:0px;">
+                    <li class="list-group-item" style="border-width:0px;">
+                        <% if(currentUser && (currentUser.username == "Teacher")) { %>
+                            <form action="/questions/questions/<%= question._id %>/teacherPoints/?_method=PUT" method="POST">
+                                <button class="btn btn-success btn-block">
+                                    Teacher Points <span class="badge"><%= question.teacherPoints %></span>
+                                </button>
+                                <input type="text" name="question[teacherPoints]" value="<%= question.teacherPoints+1 %>" hidden>
+                            </form>
+                        <% } else { %>
+                            <button class="btn btn-success btn-block">
+                                Teacher Points <span class="badge"><%= question.teacherPoints %></span>
+                            </button>
+                        <% } %>
+                    </li>
+                    <li class="list-group-item" style="border-width:0px;">
+                        <% if(currentUser && question.author.id.equals(currentUser._id)) { %>
+                            <button class="btn btn-primary btn-block">
+                                Likes <span class="badge"><%= question.likes %></span>
+                            </button>
+                        <% } else { %>
+                            <form action="/questions/questions/<%= question._id %>/likes/?_method=PUT" method="POST">
+                                <button class="btn btn-primary btn-block">
+                                    Likes <span class="badge"><%= question.likes %></span>
+                                </button>
+                                <input type="text" name="question[likes]" value="<%= question.likes+1 %>" hidden>
+                            </form>
+                        <% } %>
+                    </li>
+                </div>
+            </div>
+        </div>
+        <% if (question.answers.length>0) {%>
+            <% question.answers.forEach(function (answer) {%>
+                <div class="row">
+                    <div class="col-md-2">
+                        <a href="#" class="ui circular icon button" style="min-height: 111px; min-width:111px; margin-left:30px; background:#DDEFBB;">
+					        <h2>
+    					        <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-128.png"
+    					        style="max-height:50px; max-width:50px;">
+					        </h2>
+					        <strong><%= answer.author.username %></strong>
+				        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="well" style="min-height: 111px; min-width:100%; background:#EAECC6;">
+                            <div class="row" style="padding:auto auto;">
+                                <div class="col-md-12">
+                                    <% if(currentUser && answer.author.id.equals(currentUser._id)) { %>
+                                    <span>
+                                        <a href="/questions/questions/<%= question._id %>/answers/<%= answer._id %>/editAnswer" class="btn btn-xs btn-warning"><i class="edit icon"></i> Edit</a>
+                                        <form style="display: inline;" action="/questions/questions/<%= question._id %>/answers/<%= answer._id %>?_method=DELETE" method="POST">
+                                                <button class="btn btn-xs btn-danger"><i class="remove icon"></i> Delete</button>
+                                        </form>
+                                    </span>
+                                    <% } %>
+                                    <span class="pull-right">
+                                        <span>created: <%= answer.created %></span>
+                                    </span>
+                                    <hr>
+                                    <p class="pull-left">
+                                        <%= answer.text %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="list-group" style="border-width:0px;">
+                            <li class="list-group-item" style="border-width:0px;">
+                                <% if(currentUser && (currentUser.username == "Teacher")) { %>
+                                    <form action="/questions/questions/<%= question._id %>/answers/<%= answer._id %>/teacherPoints/?_method=PUT" method="POST">
+                                        <button class="btn btn-success btn-block">
+                                            Teacher Points <span class="badge"><%= answer.teacherPoints %></span>
+                                        </button>
+                                        <input type="text" name="answer[teacherPoints]" value="<%= answer.teacherPoints+1 %>" hidden>
+                                    </form>
+                                <% } else { %>
+                                    <button class="btn btn-success btn-block">
+                                        Teacher Points <span class="badge"><%= answer.teacherPoints %></span>
+                                    </button>
+                                <% } %>
+                            </li>
+                            <li class="list-group-item" style="border-width:0px;">
+                                <% if(currentUser && answer.author.id.equals(currentUser._id)) { %>
+                                    <button class="btn btn-primary btn-block">
+                                        Likes <span class="badge"><%= answer.likes %></span>
+                                    </button>
+                                <% } else { %>
+                                    <form action="/questions/questions/<%= question._id %>/answers/<%= answer._id %>/likes/?_method=PUT" method="POST">
+                                        <button class="btn btn-primary btn-block">
+                                            Likes <span class="badge"><%= answer.likes %></span>
+                                        </button>
+                                        <input type="text" name="answer[likes]" value="<%= answer.likes+1 %>" hidden>
+                                    </form>
+                                <% } %>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+    
+<% include ../partials/footer %>

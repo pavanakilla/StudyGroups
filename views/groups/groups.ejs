@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-md-3">
+                <% if(currentUser && (currentUser.username == "1Teacher")) {%>
+                <a class="btn btn-primary btn-large" href="/groups/groups/newGroup">Create Group</a>
+                <% } %>
+            </div>
+            <div class="col-md-9" style="padding-left:200px; margin-bottom: 10px;">
+                <h2><i class="users icon"></i> Groups</h2>
+            </div>
+        </div>
+        
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <% groups.forEach(function (group) { %>
+                <div class="col-md-4 col-sm-6">
+                    <a href="/groups/groups/<%= group._id %>" class="ui circular icon button" style="min-height: 175px; min-width:175px; margin:auto; margin-bottom: 30px; background:#DDEFBB;">
+        		        <h2>
+        			        <img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/88-512.png"
+        			        style="max-height:100px; max-width:100px;">
+        		        </h2>
+        		        <strong><%= group.name %></strong>
+        			</a>
+                </div>
+            <% }); %>
+        </div>
+        
+    </div>
+
+<% include ../partials/footer %>

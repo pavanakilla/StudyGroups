@@ -1,0 +1,80 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-2">
+                <form action="/groups/groups/<%= group._id %>/<%= currentUser._id %>/?_method=PUT" method="POST">
+                    <button class="btn btn-large btn-primary btn-block"><i class="step forward icon"></i> Join Group</button>
+                </form>
+            </div>
+            <div class="col-md-2">
+                <a href="/groups/groups" class="btn btn-large btn-info btn-block"><i class="step backward icon"></i> Go Back</a>
+            </div>
+            <div class="col-md-2">
+                <a href="/groups/groups/<%= group._id %>/editGroup" class="btn btn-large btn-warning btn-block">
+                    <i class="edit icon"></i> Edit Group</a>
+            </div>
+            <div class="col-md-2">
+                <form action="/groups/groups/<%= group._id %>/?_method=DELETE" method="POST">
+                    <button class="btn btn-large btn-danger btn-block"><i class="remove icon"></i> Delete Question</button>
+                </form>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-3">
+                <p class="lead"><i class="users icon"></i> <%= group.name %></p>
+                <div class="list-group">
+                    <li class="list-group-item"><a href="/groups/groups" class="btn btn-large btn-info btn-block">Go Back</a></li>
+                    <li class="list-group-item"><a href="/groups/groups/<%= group._id %>/editGroup" class="btn btn-large btn-warning btn-block">Edit Group</a></li>
+                    <li class="list-group-item">
+                        <form action="/groups/groups/<%= group._id %>/?_method=DELETE" method="POST">
+                            <button class="btn btn-large btn-danger btn-block">Delete Group</button>
+                        </form>
+                    </li>
+                    <li class="list-group-item">
+                        <form action="/groups/groups/<%= group._id %>/<%= currentUser._id %>?_method=PUT" method="POST">
+                            <button class="btn btn-large btn-primary btn-block">Join Group</button>
+                        </form>
+                    </li>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <p class="lead">Statistics</p>
+				<div class="progress">
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+				    	Active
+				  	</div>
+				</div>
+				<div class="progress">
+					<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+				    	Responsive
+				  	</div>
+				</div>
+				<div class="progress">
+				  	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+				    	Quality
+				  	</div>
+				</div>
+				<div class="progress">
+				  	<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+				    	Teacher Points
+				  	</div>
+				</div>
+			</div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <% group.users.forEach(function (user) {%>
+                    <li class="list-group-item">
+                        <a href="#" class="btn btn-primary btn-block">
+                            <h2><i class="user icon"></i></h2><%= user.username %>
+                        </a>
+                        </li>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<% include ../partials/footer %>

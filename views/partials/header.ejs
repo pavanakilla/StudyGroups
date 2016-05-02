@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Study Groups</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.css">
+        <!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+        <script src="semantic/dist/semantic.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <% if(!currentUser) { %>
+                        <a class="navbar-brand" href="/">Study Groups</a>
+                    <% } else {%>
+                        <a class="navbar-brand" href="/questions/questions">Study Groups</a>
+                    <% } %>
+                </div>
+                 <div class="collapse navbar-collapse">
+                     <% if(currentUser) { %>
+                         <ul class="nav navbar-nav">
+    	        		     <li><a href="/questions/questions">Group Questions</a></li>
+    	        		     <li><a href="/public_questions/publicQuestions">Public Questions</a></li>
+    	        		     <li><a href="/groups/groups">View Groups</a></li>
+    	        		     <li><a href="/rankings/rankings">Rankings</a></li>
+    	      		     </ul>
+                         <ul class="nav navbar-nav navbar-right">
+                             <li><a href="#"><i class="user icon"></i> <%= currentUser.username %></a></li>
+                             <li><a href="/logout"><i class="sign out icon"></i> Logout</a></li>
+                         </ul>
+                     <% } %>
+                 </div>
+            </div>
+        </nav>
+        <div class="container">
+            <% if(error && error.length>0) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+            <% if(success && success.length>0) { %>
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+            <% } %>
+        </div>
+        
+    

@@ -1,0 +1,116 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-2">
+                <a href="/groups/groups" class="btn btn-large btn-info btn-block"><i class="step backward icon"></i> Go Back</a>
+            </div>
+            <div class="col-md-2">
+                <h2><i class="users icon"></i> <%= group.name %></h2>
+            </div>
+            <% if(currentUser && (currentUser.username == "1Teacher")) {%>
+                <div class="col-md-2">
+                    <form action="/groups/groups/<%= group._id %>/<%= currentUser._id %>/?_method=PUT" method="POST">
+                        <button class="btn btn-large btn-primary btn-block"><i class="step forward icon"></i> Join Group</button>
+                        <input type="text" name="group_id" value="<%= group._id %>" hidden>
+                        <input type="text" name="group_name" value="<%= group.name %>" hidden>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <a href="/groups/groups/<%= group._id %>/editGroup" class="btn btn-large btn-warning btn-block">
+                        <i class="edit icon"></i> Edit Group</a>
+                </div>
+                <div class="col-md-2">
+                    <form action="/groups/groups/<%= group._id %>/?_method=DELETE" method="POST">
+                        <button class="btn btn-large btn-danger btn-block"><i class="remove icon"></i> Delete Group</button>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="lead" style="margin-bottom: 10px;">Users</p>
+            </div>
+            <% group.users.forEach(function (user) {%>
+                
+                <div class="col-md-3">
+                    <a href="/groups/groups/<%= group._id%>/<%= user._id %>" class="ui circular icon button" style="min-height: 111px; min-width:111px; margin-left:50px; background:#DDEFBB;">
+    			        <h2>
+    				        <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-128.png"
+    				        style="max-height:50px; max-width:50px;">
+    			        </h2>
+    			        <strong><%= user.username %></strong>
+    				</a>
+                </div>
+            <% }); %>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-12" style="margin-bottom: 10px; margin-top: 10px;">
+                <h3 class="lead">Statistics</h3>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 5px;">
+                <p>Questions</p>
+                <hr class="surround">
+            </div>
+            <div class="col-md-6" style="margin-bottom: 5px;">
+                <p>Answers</p>
+                <hr class="surround">
+            </div>
+            <div class="col-md-2">
+                <p>Asked (<%= group.questions %>)</p>
+            </div>
+            <div class="col-md-4">
+				<div class="progress">
+					<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<%= group.questions %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= group.questions %>%;">
+				  	</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+			    <p>Given (<%= group.answers %>)</p>
+			</div>
+            <div class="col-md-4">
+				<div class="progress">
+					<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<%= group.answers %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= group.answers %>%;">
+				  	</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+                <p>Likes (<%= group.questionLikes %>)</p>
+            </div>
+            <div class="col-md-4">
+				<div class="progress">
+					<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%= group.questionLikes %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= group.questionLikes %>%;">
+				  	</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+			    <p>Likes (<%= group.answerLikes %>)</p>
+			</div>
+            <div class="col-md-4">
+				<div class="progress">
+					<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%= group.answerLikes %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= group.answerLikes %>%;">
+				  	</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+                <p>Teacher Points (<%= group.questionTeacherPoints %>)</p>
+            </div>
+            <div class="col-md-4">
+				<div class="progress">
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= group.questionTeacherPoints %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= group.questionTeacherPoints %>%;">
+				  	</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+			    <p>Teacher Points (<%= group.answerTeacherPoints %>)</p>
+			</div>
+            <div class="col-md-4">
+				<div class="progress">
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= group.answerTeacherPoints %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= group.answerTeacherPoints %>%;">
+				  	</div>
+				</div>
+			</div>
+        </div>
+    </div>
+    
+<% include ../partials/footer %>

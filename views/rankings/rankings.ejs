@@ -1,0 +1,157 @@
+<% include ../partials/header %>
+ <div class="container">
+     <div class="row text-center" style="margin-bottom: 10px;">
+        <div class="col-md-12">
+            <h2><i class="trophy icon"></i> Rankings</h2>
+        </div>
+     </div>
+     <div class="row text-center">
+         <div class="col-md-6 lead">Questions</div>
+         <div class="col-md-6 lead">Answers</div>
+     </div>
+     <div class="row">
+         <div class="col-md-12 btn btn-group btn-group-justified">
+             <% if(ranking == "questions") {%>
+                 <a href="/rankings/rankings/questions" id="questions" class="btn btn-info active">Asked <i class="help icon"></i></a>
+             <% } else { %>
+                 <a href="/rankings/rankings/questions" id="questions" class="btn btn-info">Asked <i class="help icon"></i></a>
+             <% } %>
+         <!--</div>-->
+         <!--<div class="col-md-2">-->
+             <% if(ranking == "questionLikes") {%>
+                 <a href="/rankings/rankings/questionLikes" id="qLikes" class="btn btn-info active">Likes <i class="thumbs outline up icon"></i></a>
+             <% } else { %>
+                 <a href="/rankings/rankings/questionLikes" id="qLikes" class="btn btn-info">Likes <i class="thumbs outline up icon"></i></a>
+             <% } %>
+         <!--</div>-->
+         <!--<div class="col-md-2">-->
+             <% if(ranking == "questionTeacherPoints") {%>
+                 <a href="/rankings/rankings/questionTeacherPoints" id="qTeacherPoints" class="btn btn-info active">Teacher Points <i class="student icon"></i></a>
+             <% } else { %>
+                 <a href="/rankings/rankings/questionTeacherPoints" id="qTeacherPoints" class="btn btn-info">Teacher Points <i class="student icon"></i></a>
+             <% } %>
+         <!--</div>-->
+         <!--<div class="col-md-2">-->
+             <% if(ranking == "answers") {%>
+                 <a href="/rankings/rankings/answers" class="btn btn-success active">Given <i class="comment icon"></i></a>
+             <% } else { %>
+                 <a href="/rankings/rankings/answers" class="btn btn-success">Given <i class="comment icon"></i></a>
+             <% } %>
+         <!--</div>-->
+         <!--<div class="col-md-2">-->
+             <% if(ranking == "answerLikes") {%>
+                 <a href="/rankings/rankings/answerLikes" class="btn btn-success active">Likes <i class="thumbs outline up icon"></i></a>
+             <% } else { %>
+                 <a href="/rankings/rankings/answerLikes" class="btn btn-success">Likes <i class="thumbs outline up icon"></i></a>
+             <% } %>
+         <!--</div>-->
+         <!--<div class="col-md-2">-->
+             <% if(ranking == "answerTeacherPoints") {%>
+                 <a href="/rankings/rankings/answerTeacherPoints" class="btn btn-success active">Teacher Points <i class="student icon"></i></a>
+             <% } else { %>
+                 <a href="/rankings/rankings/answerTeacherPoints" class="btn btn-success">Teacher Points <i class="student icon"></i></a>
+             <% } %>
+         </div>
+     </div>
+     <div class="row text-center" style="margin-top: 20px;">
+         <div class="col-md-6"><p class="lead">Users</p></div>
+         <div class="col-md-6"><p class="lead">Groups</p></div>
+         <div class="col-md-6"><hr class="surround"></div>
+         <div class="col-md-6"><hr class="surround"></div>
+     </div>
+     <div class="row text-center" style="margin-top: 10px;">
+         <div class="col-md-6">
+             <div class="row">
+                 <a href="#" class="ui circular icon button" style="min-height: 150px; min-width:150px; margin:auto; background:#DDEFBB;">
+    		        <h2>
+    			        <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-128.png"
+    			        style="max-height:90px; max-width:90px;">
+    		        </h2>
+    		        <% if (ranking == "questions") { %>
+    		            <strong><%= users[0].username %> (<%= users[0].questions %>)</strong>
+    		        <% } else if (ranking == "questionLikes") { %>
+    		            <strong><%= users[0].username %> (<%= users[0].questionLikes %>)</strong>
+    		        <% } else if (ranking == "questionTeacherPoints") { %>
+    		            <strong><%= users[0].username %> (<%= users[0].questionTeacherPoints %>)</strong>
+    		        <% } else if (ranking == "answers") { %>
+    		            <strong><%= users[0].username %> (<%= users[0].answers %>)</strong>
+    		        <% } else if (ranking == "answerLikes") { %>
+    		            <strong><%= users[0].username %> (<%= users[0].answerLikes %>)</strong>
+    		        <% } else if (ranking == "answerTeacherPoints") { %>
+    		            <strong><%= users[0].username %> (<%= users[0].answerTeacherPoints %>)</strong>
+    		        <% } %>
+    			</a>
+			</div>
+			<div class="row">
+    			<% for (var i=1; i<users.length; i++) { %>
+        			<a href="#" class="ui circular icon button" style="min-height: 111px; min-width:111px; margin:auto; background:#DDEFBB;">
+        		        <h2>
+        			        <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-128.png"
+        			        style="max-height:50px; max-width:50px;">
+        		        </h2>
+        		        <% if (ranking == "questions") { %>
+        		            <strong><%= users[i].username %> (<%= users[i].questions %>)</strong>
+        		        <% } else if (ranking == "questionLikes") { %>
+        		            <strong><%= users[i].username %> (<%= users[i].questionLikes %>)</strong>
+        		        <% } else if (ranking == "questionTeacherPoints") { %>
+        		            <strong><%= users[i].username %> (<%= users[i].questionTeacherPoints %>)</strong>
+        		        <% } else if (ranking == "answers") { %>
+        		            <strong><%= users[i].username %> (<%= users[i].answers %>)</strong>
+        		        <% } else if (ranking == "answerLikes") { %>
+        		            <strong><%= users[i].username %> (<%= users[i].answerLikes %>)</strong>
+        		        <% } else if (ranking == "answerTeacherPoints") { %>
+        		            <strong><%= users[i].username %> (<%= users[i].answerTeacherPoints %>)</strong>
+        		        <% } %>
+        			</a>
+                <% } %>
+            </div>
+         </div>
+         <div class="col-md-6">
+             <div class="row">
+                 <a href="#" class="ui circular icon button" style="min-height: 150px; min-width:150px; margin:auto; background:#DDEFBB;">
+    		        <h2>
+    			        <img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/88-512.png"
+    			        style="max-height:90px; max-width:90px;">
+    		        </h2>
+    		        <% if (ranking == "questions") { %>
+    		            <strong><%= groups[0].name %> (<%= groups[0].questions %>)</strong>
+    		        <% } else if (ranking == "questionLikes") { %>
+    		            <strong><%= groups[0].name %> (<%= groups[0].questionLikes %>)</strong>
+    		        <% } else if (ranking == "questionTeacherPoints") { %>
+    		            <strong><%= groups[0].name %> (<%= groups[0].questionTeacherPoints %>)</strong>
+    		        <% } else if (ranking == "answers") { %>
+    		            <strong><%= groups[0].name %> (<%= groups[0].answers %>)</strong>
+    		        <% } else if (ranking == "answerLikes") { %>
+    		            <strong><%= groups[0].name %> (<%= groups[0].answerLikes %>)</strong>
+    		        <% } else if (ranking == "answerTeacherPoints") { %>
+    		            <strong><%= groups[0].name %> (<%= groups[0].answerTeacherPoints %>)</strong>
+    		        <% } %>
+    			</a>
+			</div>
+			<div class="row">
+    			<% for (var i=1; i<users.length; i++) { %>
+        			<a href="#" class="ui circular icon button" style="min-height: 111px; min-width:111px; margin:auto; background:#DDEFBB;">
+        		        <h2>
+        			        <img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/88-512.png"
+        			        style="max-height:50px; max-width:50px;">
+        		        </h2>
+        		        <% if (ranking == "questions") { %>
+        		            <strong><%= groups[i].name %> (<%= groups[i].questions %>)</strong>
+        		        <% } else if (ranking == "questionLikes") { %>
+        		            <strong><%= groups[i].name %> (<%= groups[i].questionLikes %>)</strong>
+        		        <% } else if (ranking == "questionTeacherPoints") { %>
+        		            <strong><%= groups[i].name %> (<%= groups[i].questionTeacherPoints %>)</strong>
+        		        <% } else if (ranking == "answers") { %>
+        		            <strong><%= groups[i].name %> (<%= groups[i].answers %>)</strong>
+        		        <% } else if (ranking == "answerLikes") { %>
+        		            <strong><%= groups[i].name %> (<%= groups[i].answerLikes %>)</strong>
+        		        <% } else if (ranking == "answerTeacherPoints") { %>
+        		            <strong><%= groups[i].name %> (<%= groups[i].answerTeacherPoints %>)</strong>
+        		        <% } %>
+        			</a>
+                <% } %>
+            </div>
+         </div>
+     </div>
+ </div>
+<% include ../partials/footer %>

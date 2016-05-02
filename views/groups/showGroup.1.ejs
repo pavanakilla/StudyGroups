@@ -1,0 +1,51 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        
+        <div class="btn btn-group">
+            <a href="/groups/groups" class="btn btn-large btn-info">Go Back</a>
+            <a href="/groups/groups/<%= group._id %>/editGroup" class="btn btn-large btn-warning">Edit Group</a>
+            <form action="/groups/groups/<%= group._id %>?_method=DELETE" method="POST">
+                <div class="form-group">
+                    <button class="btn btn-large btn-danger">Delete Group</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <div class="col-md-4">
+                <div class="thumbnail" style="height:142px;">
+                    <h2><i class="users icon"></i> <%= group.name %></h2>
+                    <hr>
+                    <% group.users.forEach(function (user) {%>
+                    	<a href="#" class="btn btn-default btn-sm"><%= user.username %></a>
+                    <% }); %>
+                </div>
+            </div>
+            <div class="col-md-8">
+				<div class="progress">
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+				    	Active
+				  	</div>
+				</div>
+				<div class="progress">
+					<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+				    	Responsive
+				  	</div>
+				</div>
+				<div class="progress">
+				  	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+				    	Quality
+				  	</div>
+				</div>
+				<div class="progress">
+				  	<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+				    	Teacher Points
+				  	</div>
+				</div>
+			</div>
+        </div>
+        
+    </div>
+    
+<% include ../partials/footer %>
