@@ -8,3 +8,5 @@ Intallation Instructions:
 3. Open command prompt.
 2. run "npm install"
 3. run "npm start"
+
+Project deployed at https://mysterious-wave-43322.herokuapp.com/
